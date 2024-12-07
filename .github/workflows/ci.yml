@@ -23,7 +23,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v3
       with:
         aws-access-key-id: ${{ secrets.AKIA3C6FLWI2HMCGMEO5 }}
-        aws-secret-access-key: ${{ secrets.AcRdllo6uoZBYulmMiY0YjJBuyixREW/T1WQk5XEW }}
+        aws-secret-access-key: ${{ secrets.cRdllo6uoZBYulmMiY0YjJBuyixREW/T1WQk5XEW }}
         aws-region: ${{ secrets.us-east-1 }}
 
     # subir archivos a el bucket
