@@ -1,28 +1,38 @@
-name: CI Pipeline AWS
+name: pipeline aws 
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
+    
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    # chequear el repositorio
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+    # compilar el sitio (si aplica)
+    - name: Build site
+      run: |
 
-      - name: Install dependencies
-        run: npm install
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AKIA3C6FLWI2HMCGMEO5 }}
+        aws-secret-access-key: ${{ secrets.AcRdllo6uoZBYulmMiY0YjJBuyixREW/T1WQk5XEW }}
+        aws-region: ${{ secrets.us-east-1 }}
 
-      - name: Run tests
-        run: npm test
+    # subir archivos a el bucket
+    - name: Sync files to S3
+      run: |
+        aws s3 sync ./path_to_your_files s3://${{ secrets.bucket-prueba-aws-ferrazuiz }} --delete
+
+    # invalidar cache de cloudfront
+    - name: Invalidate CloudFront Cache
+      run: |
+        aws cloudfront create-invalidation --distribution-id ${{ secrets.EB26P4ZMSJKZ }} --paths "/*"
+      
