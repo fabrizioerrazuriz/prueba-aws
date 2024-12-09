@@ -25,7 +25,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-        aws-region: ${{ secrets.us-east-1 }}
+        aws-region: us-east-1 
 
     # subir archivos a el bucket
     - name: Sync files to S3
